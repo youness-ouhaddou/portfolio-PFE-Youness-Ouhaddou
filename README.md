@@ -4,7 +4,7 @@
 🏫 ENSA Berrechid  
 📍 Casablanca, Morocco  
 📧 youness.ouha25@gmail.com  
-🔗 LinkedIn: (ajoute ton lien)
+🔗 LinkedIn: https://www.linkedin.com/in/youness-ouhaddou-a5074a2b8/
 
 ---
 
