@@ -1,1350 +1,1451 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Youness OUHADDOU | Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #00d4aa;
-            --primary-dark: #00a383;
-            --secondary: #0a192f;
-            --accent: #64ffda;
-            --bg-dark: #020c1b;
-            --bg-card: #112240;
-            --text: #8892b0;
-            --text-light: #ccd6f6;
-            --gradient: linear-gradient(135deg, #00d4aa 0%, #00a383 50%, #006d5b 100%);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Rajdhani', sans-serif;
-            background: var(--bg-dark);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Animated Background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background:
-                radial-gradient(ellipse at 20% 80%, rgba(0, 212, 170, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 20%, rgba(100, 255, 218, 0.06) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, rgba(10, 25, 47, 0.9) 0%, var(--bg-dark) 100%);
-        }
-
-        .circuit-pattern {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.03;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10h80v80H10z' fill='none' stroke='%2300d4aa' stroke-width='0.5'/%3E%3Ccircle cx='10' cy='10' r='3' fill='%2300d4aa'/%3E%3Ccircle cx='90' cy='10' r='3' fill='%2300d4aa'/%3E%3Ccircle cx='10' cy='90' r='3' fill='%2300d4aa'/%3E%3Ccircle cx='90' cy='90' r='3' fill='%2300d4aa'/%3E%3Cpath d='M50 10v30M10 50h30M90 50h-30M50 90v-30' stroke='%2300d4aa' stroke-width='0.5'/%3E%3Ccircle cx='50' cy='50' r='5' fill='none' stroke='%2300d4aa' stroke-width='0.5'/%3E%3C/svg%3E");
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1rem 2rem;
-            background: rgba(2, 12, 27, 0.85);
-            backdrop-filter: blur(15px);
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(0, 212, 170, 0.1);
-        }
-
-        .logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-decoration: none;
-            letter-spacing: 2px;
-        }
-
-        .logo span {
-            color: var(--text-light);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
-            transition: color 0.3s;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            color: var(--primary);
-            cursor: pointer;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 6rem 2rem 2rem;
-            position: relative;
-        }
-
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            max-width: 1200px;
-            align-items: center;
-        }
-
-        .hero-text {
-            animation: slideInLeft 1s ease-out;
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .hero-greeting {
-            color: var(--primary);
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
-            letter-spacing: 3px;
-            margin-bottom: 1rem;
-        }
-
-        .hero-name {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3.5rem;
-            font-weight: 900;
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-            line-height: 1.1;
-        }
-
-        .hero-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-desc {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            max-width: 500px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 0.8rem 2rem;
-            border-radius: 5px;
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 600;
-            font-size: 1rem;
-            text-decoration: none;
-            transition: all 0.3s;
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn-primary {
-            background: var(--gradient);
-            color: var(--secondary);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.3);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-
-        .btn-outline:hover {
-            background: rgba(0, 212, 170, 0.1);
-            transform: translateY(-3px);
-        }
-
-        /* Profile Photo */
-        .hero-image {
-            display: flex;
-            justify-content: center;
-            animation: slideInRight 1s ease-out;
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .profile-container {
-            position: relative;
-            width: 320px;
-            height: 320px;
-        }
-
-        .profile-ring {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 340px;
-            height: 340px;
-            border: 2px solid var(--primary);
-            border-radius: 50%;
-            animation: rotate 20s linear infinite;
-        }
-
-        .profile-ring::before {
-            content: '';
-            position: absolute;
-            top: -5px;
-            left: 50%;
-            width: 10px;
-            height: 10px;
-            background: var(--primary);
-            border-radius: 50%;
-            box-shadow: 0 0 20px var(--primary);
-        }
-
-        @keyframes rotate {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        .profile-photo {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--bg-card);
-            box-shadow: 0 0 40px rgba(0, 212, 170, 0.2);
-            position: relative;
-            z-index: 2;
-        }
-
-        .profile-placeholder {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: var(--bg-card);
-            border: 4px solid var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            z-index: 2;
-            overflow: hidden;
-        }
-
-        .profile-placeholder i {
-            font-size: 8rem;
-            color: var(--primary);
-            opacity: 0.5;
-        }
-
-        .profile-placeholder img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Sections */
-        section {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
-            color: var(--text-light);
-            margin-bottom: 3rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .section-title::before {
-            content: '';
-            width: 50px;
-            height: 3px;
-            background: var(--gradient);
-        }
-
-        .section-title::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: rgba(0, 212, 170, 0.2);
-        }
-
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .skill-card {
-            background: var(--bg-card);
-            border-radius: 10px;
-            padding: 1.5rem;
-            border: 1px solid rgba(0, 212, 170, 0.1);
-            transition: all 0.3s;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.1);
-        }
-
-        .skill-card h3 {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--primary);
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .skill-tag {
-            background: rgba(0, 212, 170, 0.1);
-            color: var(--accent);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            border: 1px solid rgba(100, 255, 218, 0.2);
-        }
-
-        /* Experience Section */
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--primary), transparent);
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-bottom: 2rem;
-            padding-left: 2rem;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -2rem;
-            top: 0;
-            width: 14px;
-            height: 14px;
-            background: var(--primary);
-            border-radius: 50%;
-            transform: translateX(-6px);
-            box-shadow: 0 0 20px var(--primary);
-        }
-
-        .timeline-date {
-            color: var(--primary);
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-title {
-            font-size: 1.4rem;
-            color: var(--text-light);
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-        }
-
-        .timeline-company {
-            color: var(--primary);
-            font-weight: 500;
-            margin-bottom: 0.8rem;
-        }
-
-        .timeline-desc {
-            color: var(--text);
-            font-size: 1rem;
-        }
-
-        .timeline-desc ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .timeline-desc li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-desc li::before {
-            content: '▹';
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-        }
-
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: var(--bg-card);
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid rgba(0, 212, 170, 0.1);
-            transition: all 0.3s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(0, 212, 170, 0.15);
-        }
-
-        .project-image {
-            height: 200px;
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--bg-card) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-image i {
-            font-size: 4rem;
-            color: var(--primary);
-            opacity: 0.3;
-        }
-
-        .project-image::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(0, 212, 170, 0.1) 0%, transparent 100%);
-        }
-
-        .project-content {
-            padding: 1.5rem;
-        }
-
-        .project-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            color: var(--text-light);
-            margin-bottom: 0.8rem;
-        }
-
-        .project-desc {
-            color: var(--text);
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .project-tech span {
-            background: rgba(0, 212, 170, 0.1);
-            color: var(--accent);
-            padding: 0.2rem 0.6rem;
-            border-radius: 5px;
-            font-size: 0.8rem;
-        }
-
-        /* Education Section */
-        .education-grid {
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .education-card {
-            background: var(--bg-card);
-            border-radius: 10px;
-            padding: 1.5rem;
-            border-left: 4px solid var(--primary);
-            transition: all 0.3s;
-        }
-
-        .education-card:hover {
-            transform: translateX(10px);
-            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.1);
-        }
-
-        .education-year {
-            color: var(--primary);
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
-        }
-
-        .education-title {
-            font-size: 1.3rem;
-            color: var(--text-light);
-            font-weight: 600;
-            margin: 0.5rem 0;
-        }
-
-        .education-school {
-            color: var(--accent);
-            font-weight: 500;
-        }
-
-        /* Languages Section */
-        .languages-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .language-card {
-            background: var(--bg-card);
-            border-radius: 10px;
-            padding: 1.5rem;
-            text-align: center;
-            border: 1px solid rgba(0, 212, 170, 0.1);
-            transition: all 0.3s;
-        }
-
-        .language-card:hover {
-            border-color: var(--primary);
-        }
-
-        .language-name {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--text-light);
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .language-level {
-            color: var(--primary);
-            font-size: 0.9rem;
-        }
-
-        .language-bar {
-            height: 4px;
-            background: rgba(0, 212, 170, 0.2);
-            border-radius: 2px;
-            margin-top: 0.8rem;
-            overflow: hidden;
-        }
-
-        .language-bar-fill {
-            height: 100%;
-            background: var(--gradient);
-            border-radius: 2px;
-            transition: width 1s ease-out;
-        }
-
-        /* Contact Section */
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: start;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            color: var(--text);
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .contact-item:hover {
-            color: var(--primary);
-            transform: translateX(10px);
-        }
-
-        .contact-item i {
-            width: 50px;
-            height: 50px;
-            background: var(--bg-card);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: var(--primary);
-            border: 1px solid rgba(0, 212, 170, 0.2);
-        }
-
-        .contact-form {
-            background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(0, 212, 170, 0.1);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            background: var(--bg-dark);
-            border: 1px solid rgba(0, 212, 170, 0.2);
-            border-radius: 8px;
-            color: var(--text-light);
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            border-top: 1px solid rgba(0, 212, 170, 0.1);
-            margin-top: 3rem;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .social-links a {
-            width: 45px;
-            height: 45px;
-            background: var(--bg-card);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text);
-            font-size: 1.2rem;
-            transition: all 0.3s;
-            border: 1px solid rgba(0, 212, 170, 0.2);
-        }
-
-        .social-links a:hover {
-            color: var(--primary);
-            border-color: var(--primary);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 212, 170, 0.2);
-        }
-
-        .copyright {
-            color: var(--text);
-            font-size: 0.9rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 900px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 2rem;
-            }
-
-            .hero-text {
-                order: 2;
-            }
-
-            .hero-image {
-                order: 1;
-            }
-
-            .hero-name {
-                font-size: 2.5rem;
-            }
-
-            .hero-title {
-                font-size: 1.4rem;
-            }
-
-            .hero-desc {
-                margin: 0 auto 2rem;
-            }
-
-            .hero-buttons {
-                justify-content: center;
-            }
-
-            .profile-container {
-                width: 250px;
-                height: 250px;
-            }
-
-            .profile-placeholder,
-            .profile-photo {
-                width: 230px;
-                height: 230px;
-            }
-
-            .profile-ring {
-                width: 260px;
-                height: 260px;
-            }
-
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(2, 12, 27, 0.98);
-                flex-direction: column;
-                padding: 1rem 2rem;
-                gap: 1rem;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .contact-content {
-                grid-template-columns: 1fr;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-name {
-                font-size: 2rem;
-            }
-
-            .hero-title {
-                font-size: 1.2rem;
-            }
-
-            section {
-                padding: 3rem 1rem;
-            }
-
-            .skills-grid,
-            .languages-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Scroll Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Toast Notification */
-        .toast {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: var(--bg-card);
-            color: var(--text-light);
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            border: 1px solid var(--primary);
-            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.2);
-            transform: translateY(100px);
-            opacity: 0;
-            transition: all 0.3s;
-            z-index: 2000;
-        }
-
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    </style>
-</head>
-<body>
-    <div class="bg-animation"></div>
-    <div class="circuit-pattern"></div>
-
-    <!-- Navigation -->
-    <nav>
-        <a href="#" class="logo">Y<span>O</span></a>
-        <ul class="nav-links">
-            <li><a href="#about">À propos</a></li>
-            <li><a href="#skills">Compétences</a></li>
-            <li><a href="#experience">Expériences</a></li>
-            <li><a href="#projects">Projets</a></li>
-            <li><a href="#education">Formation</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div class="menu-toggle" onclick="toggleMenu()">
-            <i class="fas fa-bars"></i>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero" id="about">
-        <div class="hero-content">
-            <div class="hero-text">
-                <p class="hero-greeting">👋 BONJOUR, JE SUIS</p>
-                <h1 class="hero-name">Youness OUHADDOU</h1>
-                <h2 class="hero-title">Futur Ingénieur en Génie Mécatronique & Systèmes Intelligents</h2>
-                <p class="hero-desc">
-                    Étudiant ingénieur à l'ENSA de Berrechid, passionné par les systèmes embarqués, l'IoT et l'intelligence artificielle appliquée à l'industrie 4.0. À la recherche d'un stage de fin d'études (PFE).
-                </p>
-                <div class="hero-buttons">
-                    <a href="#contact" class="btn btn-primary">
-                        <i class="fas fa-paper-plane"></i> Me Contacter
-                    </a>
-                    <a href="#projects" class="btn btn-outline">
-                        <i class="fas fa-code"></i> Voir mes projets
-                    </a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="profile-container">
-                    <div class="profile-ring"></div>
-                    <div class="profile-placeholder">
-                        <!-- Remplacez src par votre photo de profil -->
-                        <img src="Youness_ouhaddou.png" alt="Youness OUHADDOU" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-user\'></i>';">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills">
-        <h2 class="section-title fade-in">Compétences Techniques</h2>
-        <div class="skills-grid">
-            <div class="skill-card fade-in">
-                <h3><i class="fas fa-code"></i> Langages</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">C</span>
-                    <span class="skill-tag">C++</span>
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">MySQL</span>
-                    <span class="skill-tag">VHDL</span>
-                </div>
-            </div>
-            <div class="skill-card fade-in">
-                <h3><i class="fas fa-microchip"></i> Systèmes Embarqués</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">Raspberry Pi</span>
-                    <span class="skill-tag">ESP32</span>
-                    <span class="skill-tag">Arduino</span>
-                    <span class="skill-tag">Linux embarqué</span>
-                    <span class="skill-tag">FPGA</span>
-                </div>
-            </div>
-            <div class="skill-card fade-in">
-                <h3><i class="fas fa-network-wired"></i> IoT & Supervision</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">Node-RED</span>
-                    <span class="skill-tag">Grafana</span>
-                    <span class="skill-tag">Streamlit</span>
-                    <span class="skill-tag">InfluxDB</span>
-                </div>
-            </div>
-            <div class="skill-card fade-in">
-                <h3><i class="fas fa-car"></i> Concepts Automatique</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">AUTOSAR</span>
-                    <span class="skill-tag">ADAS</span>
-                    <span class="skill-tag">RTOS</span>
-                </div>
-            </div>
-            <div class="skill-card fade-in">
-                <h3><i class="fas fa-plug"></i> Bus de Communication</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">UART</span>
-                    <span class="skill-tag">SPI</span>
-                    <span class="skill-tag">I2C</span>
-                    <span class="skill-tag">CAN</span>
-                </div>
-            </div>
-            <div class="skill-card fade-in">
-                <h3><i class="fas fa-brain"></i> IA & Vision</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">TensorFlow</span>
-                    <span class="skill-tag">OpenCV</span>
-                    <span class="skill-tag">CNN</span>
-                </div>
-            </div>
-            <div class="skill-card fade-in">
-                <h3><i class="fas fa-globe"></i> Protocoles</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">HTTP</span>
-                    <span class="skill-tag">REST</span>
-                    <span class="skill-tag">MQTT</span>
-                    <span class="skill-tag">TCP/UDP</span>
-                </div>
-            </div>
-            <div class="skill-card fade-in">
-                <h3><i class="fas fa-tools"></i> Outils</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">VS Code</span>
-                    <span class="skill-tag">MATLAB/Simulink</span>
-                    <span class="skill-tag">Proteus</span>
-                    <span class="skill-tag">SolidWorks</span>
-                    <span class="skill-tag">Ansys</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience">
-        <h2 class="section-title fade-in">Expériences Professionnelles</h2>
-        <div class="timeline">
-            <div class="timeline-item fade-in">
-                <span class="timeline-date">Août 2025 - Octobre 2025</span>
-                <h3 class="timeline-title">Stage PFA</h3>
-                <p class="timeline-company">Hirschmann Automotive</p>
-                <div class="timeline-desc">
-                    <ul>
-                        <li>Mise en place d'un système de supervision IoT sur Raspberry Pi avec capteurs</li>
-                        <li>Développement d'une interface de visualisation temps réel (Grafana / Node-RED)</li>
-                        <li>Application d'analyse des indicateurs MTBF, MTTR, TRS, Pareto, Ishikawa</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="timeline-item fade-in">
-                <span class="timeline-date">Juillet 2024 - Août 2024</span>
-                <h3 class="timeline-title">Stage d'initiation</h3>
-                <p class="timeline-company">École Centrale Casablanca</p>
-                <div class="timeline-desc">
-                    <ul>
-                        <li>Développement d'un système d'analyse du gisement éolien</li>
-                        <li>Réalisation d'une étude aérodynamique du système de conversion éolien</li>
-                        <li>Conception d'une pale verticale pour un usage domestique</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects">
-        <h2 class="section-title fade-in">Projets Académiques</h2>
-        <div class="projects-grid">
-            <div class="project-card fade-in">
-                <div class="project-image">
-                    <i class="fab fa-linux"></i>
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">Système d'exploitation embarqué Linux</h3>
-                    <p class="project-desc">
-                        Développement d'un système Linux embarqué minimaliste pour ARM (U-Boot, Kernel, BusyBox), avec cross-compilation via Crosstool-NG, gestion des Device Tree, et émulation sous QEMU.
-                    </p>
-                    <div class="project-tech">
-                        <span>Linux</span>
-                        <span>ARM</span>
-                        <span>QEMU</span>
-                        <span>U-Boot</span>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card fade-in">
-                <div class="project-image">
-                    <i class="fas fa-robot"></i>
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">Station Météo & Robot de Surveillance Agricole</h3>
-                    <p class="project-desc">
-                        Solution IoT agricole complète avec capteurs, irrigation intelligente, prédiction météo par IA sur Raspberry Pi, robot mobile téléopéré avec double caméra et surveillance en temps réel.
-                    </p>
-                    <div class="project-tech">
-                        <span>Raspberry Pi</span>
-                        <span>IoT</span>
-                        <span>IA</span>
-                        <span>Python</span>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card fade-in">
-                <div class="project-image">
-                    <i class="fas fa-home"></i>
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">Maison Intelligente</h3>
-                    <p class="project-desc">
-                        Contrôle des lumières et appareils à distance avec une application mobile, installation de capteurs pour détecter les intrusions, la température et la fumée, avec système d'alerte.
-                    </p>
-                    <div class="project-tech">
-                        <span>ESP32</span>
-                        <span>Mobile App</span>
-                        <span>Capteurs</span>
-                        <span>IoT</span>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card fade-in">
-                <div class="project-image">
-                    <i class="fas fa-lock"></i>
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">Casiers Sécurisés RFID</h3>
-                    <p class="project-desc">
-                        Conception et réalisation d'un système de casiers sécurisés utilisant une carte Arduino Uno et une carte RFID. Programmation et intégration du système électronique pour contrôler l'accès.
-                    </p>
-                    <div class="project-tech">
-                        <span>Arduino</span>
-                        <span>RFID</span>
-                        <span>C++</span>
-                        <span>Électronique</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Education Section -->
-    <section id="education">
-        <h2 class="section-title fade-in">Parcours Académique</h2>
-        <div class="education-grid">
-            <div class="education-card fade-in">
-                <span class="education-year">2023 - 2026</span>
-                <h3 class="education-title">Cycle d'Ingénieur - Génie Mécatronique et Systèmes Intelligents</h3>
-                <p class="education-school">ENSA Berrechid</p>
-            </div>
-            <div class="education-card fade-in">
-                <span class="education-year">2021 - 2023</span>
-                <h3 class="education-title">Licence : Sciences de la Matière Physique - Option Électronique</h3>
-                <p class="education-school">Université Hassan II, FS Ain Chock</p>
-            </div>
-            <div class="education-card fade-in">
-                <span class="education-year">2019 - 2020</span>
-                <h3 class="education-title">Baccalauréat : Sciences Expérimentales - Option Sciences Physiques</h3>
-                <p class="education-school">Lycée Qualifiant Taoufik Hakim</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Languages Section -->
-    <section id="languages">
-        <h2 class="section-title fade-in">Langues</h2>
-        <div class="languages-grid">
-            <div class="language-card fade-in">
-                <h3 class="language-name">🇲🇦 Arabe</h3>
-                <p class="language-level">Maternelle</p>
-                <div class="language-bar">
-                    <div class="language-bar-fill" style="width: 100%;"></div>
-                </div>
-            </div>
-            <div class="language-card fade-in">
-                <h3 class="language-name">ⵣ Tamazight</h3>
-                <p class="language-level">Maternelle</p>
-                <div class="language-bar">
-                    <div class="language-bar-fill" style="width: 100%;"></div>
-                </div>
-            </div>
-            <div class="language-card fade-in">
-                <h3 class="language-name">🇬🇧 English</h3>
-                <p class="language-level">Upper-Intermediate</p>
-                <div class="language-bar">
-                    <div class="language-bar-fill" style="width: 75%;"></div>
-                </div>
-            </div>
-            <div class="language-card fade-in">
-                <h3 class="language-name">🇫🇷 Français</h3>
-                <p class="language-level">Intermédiaire</p>
-                <div class="language-bar">
-                    <div class="language-bar-fill" style="width: 60%;"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <h2 class="section-title fade-in">Me Contacter</h2>
-        <div class="contact-content">
-            <div class="contact-info fade-in">
-                <a href="mailto:youness.ouha25@gmail.com" class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <span>youness.ouha25@gmail.com</span>
-                </a>
-                <a href="tel:+212611868230" class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    <span>+212 611 868 230</span>
-                </a>
-                <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>Nouaceur, Casablanca, Maroc</span>
-                </div>
-                <a href="https://www.linkedin.com/in/youness-ouhaddou-a5074a2b8/" target="_blank" class="contact-item">
-                    <i class="fab fa-linkedin"></i>
-                    <span>LinkedIn Profile</span>
-                </a>
-                <a href="https://github.com/youness-ouhaddou" target="_blank" class="contact-item">
-                    <i class="fab fa-github"></i>
-                    <span>GitHub Profile</span>
-                </a>
-            </div>
-            <form class="contact-form fade-in" onsubmit="handleSubmit(event)">
-                <div class="form-group">
-                    <label for="name">Nom complet</label>
-                    <input type="text" id="name" name="name" required placeholder="Votre nom">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required placeholder="votre@email.com">
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" required placeholder="Votre message..."></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">
-                    <i class="fas fa-paper-plane"></i> Envoyer le message
-                </button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="social-links">
-            <a href="https://www.linkedin.com/in/youness-ouhaddou-a5074a2b8/" target="_blank" aria-label="LinkedIn">
-                <i class="fab fa-linkedin-in"></i>
-            </a>
-            <a href="https://github.com/youness-ouhaddou" target="_blank" aria-label="GitHub">
-                <i class="fab fa-github"></i>
-            </a>
-            <a href="mailto:youness.ouha25@gmail.com" aria-label="Email">
-                <i class="fas fa-envelope"></i>
-            </a>
-        </div>
-        <p class="copyright">© 2025 Youness OUHADDOU. Tous droits réservés.</p>
-    </footer>
-
-    <!-- Toast Notification -->
-    <div class="toast" id="toast"></div>
-
-    <script>
-        // Mobile Menu Toggle
-        function toggleMenu() {
-            document.querySelector('.nav-links').classList.toggle('active');
-        }
-
-        // Close menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.querySelector('.nav-links').classList.remove('active');
-            });
-        });
-
-        // Scroll Animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Form Submission Handler
-        function handleSubmit(event) {
-            event.preventDefault();
-
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-
-            // Create mailto link
-            const mailtoLink = `mailto:youness.ouha25@gmail.com?subject=Portfolio Contact - ${encodeURIComponent(name)}&body=${encodeURIComponent(`De: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
-
-            window.open(mailtoLink, '_blank');
-
-            showToast('Redirection vers votre client email...');
-
-            // Reset form
-            event.target.reset();
-        }
-
-        // Toast Notification
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.classList.add('show');
-
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Add navbar background on scroll
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.style.background = 'rgba(2, 12, 27, 0.95)';
-            } else {
-                nav.style.background = 'rgba(2, 12, 27, 0.85)';
-            }
-        });
-    </script>
-</body>
-</html>
++    1 <!DOCTYPE html>
++    2 <html lang="fr">
++    3 <head>
++    4     <meta charset="UTF-8">
++    5     <meta name="viewport" content="width=device-width, initial-scale=1.0">
++    6     <title>Youness OUHADDOU | Portfolio</title>
++    7     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
++    8     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
++    9     <style>
++   10         :root {
++   11             --primary: #0891b2;
++   12             --primary-light: #22d3ee;
++   13             --primary-dark: #0e7490;
++   14             --secondary: #0f172a;
++   15             --accent: #f59e0b;
++   16             --bg-light: #ffffff;
++   17             --bg-soft: #f8fafc;
++   18             --bg-card: #ffffff;
++   19             --text-dark: #1e293b;
++   20             --text: #475569;
++   21             --text-light: #94a3b8;
++   22             --border: #e2e8f0;
++   23             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
++   24             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
++   25             --gradient: linear-gradient(135deg, #0891b2 0%, #22d3ee 100%);
++   26         }
++   27 
++   28         * {
++   29             margin: 0;
++   30             padding: 0;
++   31             box-sizing: border-box;
++   32         }
++   33 
++   34         html {
++   35             scroll-behavior: smooth;
++   36         }
++   37 
++   38         body {
++   39             font-family: 'Source Sans Pro', sans-serif;
++   40             background: var(--bg-soft);
++   41             color: var(--text);
++   42             line-height: 1.7;
++   43         }
++   44 
++   45         /* Decorative Background */
++   46         .bg-decoration {
++   47             position: fixed;
++   48             top: 0;
++   49             left: 0;
++   50             width: 100%;
++   51             height: 100%;
++   52             z-index: -1;
++   53             background: 
++   54                 radial-gradient(circle at 10% 20%, rgba(8, 145, 178, 0.05) 0%, transparent 40%),
++   55                 radial-gradient(circle at 90% 80%, rgba(245, 158, 11, 0.05) 0%, transparent 40%),
++   56                 var(--bg-soft);
++   57         }
++   58 
++   59         /* Navigation */
++   60         nav {
++   61             position: fixed;
++   62             top: 0;
++   63             width: 100%;
++   64             padding: 1rem 2rem;
++   65             background: rgba(255, 255, 255, 0.95);
++   66             backdrop-filter: blur(10px);
++   67             z-index: 1000;
++   68             display: flex;
++   69             justify-content: space-between;
++   70             align-items: center;
++   71             border-bottom: 1px solid var(--border);
++   72             box-shadow: var(--shadow);
++   73         }
++   74 
++   75         .logo {
++   76             font-family: 'Playfair Display', serif;
++   77             font-size: 1.8rem;
++   78             font-weight: 700;
++   79             color: var(--primary);
++   80             text-decoration: none;
++   81         }
++   82 
++   83         .logo span {
++   84             color: var(--accent);
++   85         }
++   86 
++   87         .nav-links {
++   88             display: flex;
++   89             gap: 2rem;
++   90             list-style: none;
++   91         }
++   92 
++   93         .nav-links a {
++   94             color: var(--text-dark);
++   95             text-decoration: none;
++   96             font-weight: 600;
++   97             font-size: 0.95rem;
++   98             transition: color 0.3s;
++   99             position: relative;
++  100         }
++  101 
++  102         .nav-links a::after {
++  103             content: '';
++  104             position: absolute;
++  105             bottom: -5px;
++  106             left: 0;
++  107             width: 0;
++  108             height: 2px;
++  109             background: var(--primary);
++  110             transition: width 0.3s;
++  111         }
++  112 
++  113         .nav-links a:hover::after {
++  114             width: 100%;
++  115         }
++  116 
++  117         .nav-links a:hover {
++  118             color: var(--primary);
++  119         }
++  120 
++  121         .menu-toggle {
++  122             display: none;
++  123             font-size: 1.5rem;
++  124             color: var(--primary);
++  125             cursor: pointer;
++  126         }
++  127 
++  128         /* Hero Section */
++  129         .hero {
++  130             min-height: 100vh;
++  131             display: flex;
++  132             align-items: center;
++  133             justify-content: center;
++  134             padding: 8rem 2rem 4rem;
++  135             background: linear-gradient(180deg, var(--bg-light) 0%, var(--bg-soft) 100%);
++  136         }
++  137 
++  138         .hero-content {
++  139             display: grid;
++  140             grid-template-columns: 1fr 1fr;
++  141             gap: 4rem;
++  142             max-width: 1200px;
++  143             align-items: center;
++  144         }
++  145 
++  146         .hero-text {
++  147             animation: fadeInUp 0.8s ease-out;
++  148         }
++  149 
++  150         @keyframes fadeInUp {
++  151             from {
++  152                 opacity: 0;
++  153                 transform: translateY(30px);
++  154             }
++  155             to {
++  156                 opacity: 1;
++  157                 transform: translateY(0);
++  158             }
++  159         }
++  160 
++  161         .hero-greeting {
++  162             color: var(--primary);
++  163             font-weight: 600;
++  164             font-size: 1.1rem;
++  165             letter-spacing: 2px;
++  166             margin-bottom: 0.5rem;
++  167             text-transform: uppercase;
++  168         }
++  169 
++  170         .hero-name {
++  171             font-family: 'Playfair Display', serif;
++  172             font-size: 3.5rem;
++  173             font-weight: 700;
++  174             color: var(--text-dark);
++  175             margin-bottom: 0.5rem;
++  176             line-height: 1.2;
++  177         }
++  178 
++  179         .hero-title {
++  180             font-size: 1.5rem;
++  181             font-weight: 600;
++  182             color: var(--primary);
++  183             margin-bottom: 1.5rem;
++  184         }
++  185 
++  186         .hero-desc {
++  187             font-size: 1.1rem;
++  188             margin-bottom: 2rem;
++  189             color: var(--text);
++  190             max-width: 500px;
++  191         }
++  192 
++  193         .hero-buttons {
++  194             display: flex;
++  195             gap: 1rem;
++  196             flex-wrap: wrap;
++  197         }
++  198 
++  199         .btn {
++  200             padding: 0.9rem 2rem;
++  201             border-radius: 50px;
++  202             font-family: 'Source Sans Pro', sans-serif;
++  203             font-weight: 600;
++  204             font-size: 1rem;
++  205             text-decoration: none;
++  206             transition: all 0.3s;
++  207             cursor: pointer;
++  208             border: none;
++  209             display: inline-flex;
++  210             align-items: center;
++  211             gap: 0.5rem;
++  212         }
++  213 
++  214         .btn-primary {
++  215             background: var(--gradient);
++  216             color: white;
++  217             box-shadow: 0 4px 15px rgba(8, 145, 178, 0.3);
++  218         }
++  219 
++  220         .btn-primary:hover {
++  221             transform: translateY(-3px);
++  222             box-shadow: 0 8px 25px rgba(8, 145, 178, 0.4);
++  223         }
++  224 
++  225         .btn-outline {
++  226             background: transparent;
++  227             color: var(--primary);
++  228             border: 2px solid var(--primary);
++  229         }
++  230 
++  231         .btn-outline:hover {
++  232             background: var(--primary);
++  233             color: white;
++  234             transform: translateY(-3px);
++  235         }
++  236 
++  237         /* Profile Photo */
++  238         .hero-image {
++  239             display: flex;
++  240             justify-content: center;
++  241             animation: fadeInUp 0.8s ease-out 0.2s backwards;
++  242         }
++  243 
++  244         .profile-container {
++  245             position: relative;
++  246             width: 350px;
++  247             height: 350px;
++  248         }
++  249 
++  250         .profile-bg {
++  251             position: absolute;
++  252             top: 20px;
++  253             left: 20px;
++  254             width: 100%;
++  255             height: 100%;
++  256             background: var(--gradient);
++  257             border-radius: 30px;
++  258             transform: rotate(6deg);
++  259         }
++  260 
++  261         .profile-photo-wrapper {
++  262             position: relative;
++  263             width: 100%;
++  264             height: 100%;
++  265             border-radius: 30px;
++  266             overflow: hidden;
++  267             background: var(--bg-card);
++  268             box-shadow: var(--shadow-lg);
++  269         }
++  270 
++  271         .profile-photo {
++  272             width: 100%;
++  273             height: 100%;
++  274             object-fit: cover;
++  275         }
++  276 
++  277         .profile-placeholder {
++  278             width: 100%;
++  279             height: 100%;
++  280             display: flex;
++  281             align-items: center;
++  282             justify-content: center;
++  283             background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
++  284         }
++  285 
++  286         .profile-placeholder i {
++  287             font-size: 8rem;
++  288             color: var(--primary);
++  289             opacity: 0.3;
++  290         }
++  291 
++  292         /* Sections */
++  293         section {
++  294             padding: 5rem 2rem;
++  295             max-width: 1200px;
++  296             margin: 0 auto;
++  297         }
++  298 
++  299         .section-title {
++  300             font-family: 'Playfair Display', serif;
++  301             font-size: 2.5rem;
++  302             color: var(--text-dark);
++  303             margin-bottom: 1rem;
++  304             text-align: center;
++  305         }
++  306 
++  307         .section-subtitle {
++  308             text-align: center;
++  309             color: var(--text);
++  310             margin-bottom: 3rem;
++  311             font-size: 1.1rem;
++  312         }
++  313 
++  314         /* Skills Section */
++  315         .skills-grid {
++  316             display: grid;
++  317             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
++  318             gap: 1.5rem;
++  319         }
++  320 
++  321         .skill-card {
++  322             background: var(--bg-card);
++  323             border-radius: 16px;
++  324             padding: 1.8rem;
++  325             border: 1px solid var(--border);
++  326             transition: all 0.3s;
++  327             box-shadow: var(--shadow);
++  328         }
++  329 
++  330         .skill-card:hover {
++  331             transform: translateY(-5px);
++  332             box-shadow: var(--shadow-lg);
++  333             border-color: var(--primary-light);
++  334         }
++  335 
++  336         .skill-card h3 {
++  337             color: var(--text-dark);
++  338             font-size: 1.1rem;
++  339             margin-bottom: 1rem;
++  340             display: flex;
++  341             align-items: center;
++  342             gap: 0.5rem;
++  343         }
++  344 
++  345         .skill-card h3 i {
++  346             color: var(--primary);
++  347             font-size: 1.3rem;
++  348         }
++  349 
++  350         .skill-tags {
++  351             display: flex;
++  352             flex-wrap: wrap;
++  353             gap: 0.5rem;
++  354         }
++  355 
++  356         .skill-tag {
++  357             background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
++  358             color: var(--primary-dark);
++  359             padding: 0.4rem 0.9rem;
++  360             border-radius: 20px;
++  361             font-size: 0.85rem;
++  362             font-weight: 600;
++  363             border: 1px solid #bae6fd;
++  364         }
++  365 
++  366         /* Experience Section */
++  367         .timeline {
++  368             position: relative;
++  369             padding-left: 2rem;
++  370         }
++  371 
++  372         .timeline::before {
++  373             content: '';
++  374             position: absolute;
++  375             left: 0;
++  376             top: 0;
++  377             height: 100%;
++  378             width: 3px;
++  379             background: linear-gradient(to bottom, var(--primary), var(--primary-light));
++  380             border-radius: 3px;
++  381         }
++  382 
++  383         .timeline-item {
++  384             position: relative;
++  385             padding-bottom: 2.5rem;
++  386             padding-left: 2.5rem;
++  387         }
++  388 
++  389         .timeline-item::before {
++  390             content: '';
++  391             position: absolute;
++  392             left: -2rem;
++  393             top: 5px;
++  394             width: 16px;
++  395             height: 16px;
++  396             background: var(--primary);
++  397             border-radius: 50%;
++  398             transform: translateX(-6.5px);
++  399             border: 3px solid var(--bg-soft);
++  400             box-shadow: 0 0 0 3px var(--primary);
++  401         }
++  402 
++  403         .timeline-card {
++  404             background: var(--bg-card);
++  405             border-radius: 16px;
++  406             padding: 1.5rem;
++  407             box-shadow: var(--shadow);
++  408             border: 1px solid var(--border);
++  409         }
++  410 
++  411         .timeline-date {
++  412             display: inline-block;
++  413             background: var(--gradient);
++  414             color: white;
++  415             padding: 0.3rem 1rem;
++  416             border-radius: 20px;
++  417             font-size: 0.85rem;
++  418             font-weight: 600;
++  419             margin-bottom: 0.8rem;
++  420         }
++  421 
++  422         .timeline-title {
++  423             font-size: 1.3rem;
++  424             color: var(--text-dark);
++  425             font-weight: 700;
++  426             margin-bottom: 0.3rem;
++  427         }
++  428 
++  429         .timeline-company {
++  430             color: var(--primary);
++  431             font-weight: 600;
++  432             margin-bottom: 1rem;
++  433             font-size: 1.05rem;
++  434         }
++  435 
++  436         .timeline-desc ul {
++  437             list-style: none;
++  438             padding-left: 0;
++  439         }
++  440 
++  441         .timeline-desc li {
++  442             position: relative;
++  443             padding-left: 1.5rem;
++  444             margin-bottom: 0.5rem;
++  445             color: var(--text);
++  446         }
++  447 
++  448         .timeline-desc li::before {
++  449             content: '✓';
++  450             position: absolute;
++  451             left: 0;
++  452             color: var(--primary);
++  453             font-weight: bold;
++  454         }
++  455 
++  456         /* =============================================
++  457            PROJECTS SECTION - INSTRUCTIONS POUR AJOUTER DES PROJETS
++  458            =============================================
++  459            
++  460            Pour ajouter un nouveau projet avec image:
++  461            
++  462            1. Créez un dossier "images" dans votre repository
++  463            2. Ajoutez vos images de projets dedans (ex: images/projet1.jpg)
++  464            3. Copiez le bloc <div class="project-card"> ci-dessous
++  465            4. Modifiez:
++  466               - src="images/votre-image.jpg" 
++  467               - Le titre du projet
++  468               - La description
++  469               - Les technologies utilisées
++  470            
++  471            EXEMPLE DE STRUCTURE DE DOSSIER:
++  472            votre-repository/
++  473            ├── index.html
++  474            ├── photo.jpg (votre photo de profil)
++  475            └── images/
++  476                ├── projet-linux.jpg
++  477                ├── projet-robot.jpg
++  478                ├── projet-maison.jpg
++  479                └── projet-rfid.jpg
++  480         */
++  481 
++  482         .projects-grid {
++  483             display: grid;
++  484             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
++  485             gap: 2rem;
++  486         }
++  487 
++  488         .project-card {
++  489             background: var(--bg-card);
++  490             border-radius: 20px;
++  491             overflow: hidden;
++  492             border: 1px solid var(--border);
++  493             transition: all 0.3s;
++  494             box-shadow: var(--shadow);
++  495         }
++  496 
++  497         .project-card:hover {
++  498             transform: translateY(-8px);
++  499             box-shadow: var(--shadow-lg);
++  500         }
++  501 
++  502         .project-image {
++  503             height: 220px;
++  504             background: linear-gradient(135deg, #e0f2fe 0%, #fef3c7 100%);
++  505             display: flex;
++  506             align-items: center;
++  507             justify-content: center;
++  508             position: relative;
++  509             overflow: hidden;
++  510         }
++  511 
++  512         .project-image img {
++  513             width: 100%;
++  514             height: 100%;
++  515             object-fit: cover;
++  516             transition: transform 0.3s;
++  517         }
++  518 
++  519         .project-card:hover .project-image img {
++  520             transform: scale(1.05);
++  521         }
++  522 
++  523         .project-image i {
++  524             font-size: 4rem;
++  525             color: var(--primary);
++  526             opacity: 0.4;
++  527         }
++  528 
++  529         .project-image-placeholder {
++  530             display: flex;
++  531             flex-direction: column;
++  532             align-items: center;
++  533             gap: 0.5rem;
++  534         }
++  535 
++  536         .project-image-placeholder span {
++  537             font-size: 0.9rem;
++  538             color: var(--text-light);
++  539         }
++  540 
++  541         .project-content {
++  542             padding: 1.5rem;
++  543         }
++  544 
++  545         .project-title {
++  546             font-family: 'Playfair Display', serif;
++  547             font-size: 1.3rem;
++  548             color: var(--text-dark);
++  549             margin-bottom: 0.8rem;
++  550         }
++  551 
++  552         .project-desc {
++  553             color: var(--text);
++  554             font-size: 0.95rem;
++  555             margin-bottom: 1rem;
++  556             line-height: 1.6;
++  557         }
++  558 
++  559         .project-tech {
++  560             display: flex;
++  561             flex-wrap: wrap;
++  562             gap: 0.5rem;
++  563         }
++  564 
++  565         .project-tech span {
++  566             background: linear-gradient(135deg, #fef3c7 0%, #fef9c3 100%);
++  567             color: #92400e;
++  568             padding: 0.3rem 0.7rem;
++  569             border-radius: 8px;
++  570             font-size: 0.8rem;
++  571             font-weight: 600;
++  572             border: 1px solid #fde68a;
++  573         }
++  574 
++  575         /* Education Section */
++  576         .education-grid {
++  577             display: grid;
++  578             gap: 1.5rem;
++  579         }
++  580 
++  581         .education-card {
++  582             background: var(--bg-card);
++  583             border-radius: 16px;
++  584             padding: 1.8rem;
++  585             border-left: 5px solid var(--primary);
++  586             box-shadow: var(--shadow);
++  587             transition: all 0.3s;
++  588         }
++  589 
++  590         .education-card:hover {
++  591             transform: translateX(10px);
++  592             box-shadow: var(--shadow-lg);
++  593         }
++  594 
++  595         .education-year {
++  596             display: inline-block;
++  597             background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
++  598             color: var(--primary-dark);
++  599             padding: 0.3rem 0.8rem;
++  600             border-radius: 20px;
++  601             font-size: 0.85rem;
++  602             font-weight: 600;
++  603         }
++  604 
++  605         .education-title {
++  606             font-size: 1.3rem;
++  607             color: var(--text-dark);
++  608             font-weight: 700;
++  609             margin: 0.8rem 0 0.3rem;
++  610         }
++  611 
++  612         .education-school {
++  613             color: var(--primary);
++  614             font-weight: 600;
++  615         }
++  616 
++  617         /* Languages Section */
++  618         .languages-grid {
++  619             display: grid;
++  620             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
++  621             gap: 1.5rem;
++  622         }
++  623 
++  624         .language-card {
++  625             background: var(--bg-card);
++  626             border-radius: 16px;
++  627             padding: 1.5rem;
++  628             text-align: center;
++  629             box-shadow: var(--shadow);
++  630             border: 1px solid var(--border);
++  631             transition: all 0.3s;
++  632         }
++  633 
++  634         .language-card:hover {
++  635             transform: translateY(-5px);
++  636             box-shadow: var(--shadow-lg);
++  637         }
++  638 
++  639         .language-flag {
++  640             font-size: 2.5rem;
++  641             margin-bottom: 0.5rem;
++  642         }
++  643 
++  644         .language-name {
++  645             color: var(--text-dark);
++  646             font-size: 1.1rem;
++  647             font-weight: 700;
++  648             margin-bottom: 0.3rem;
++  649         }
++  650 
++  651         .language-level {
++  652             color: var(--primary);
++  653             font-size: 0.9rem;
++  654             font-weight: 600;
++  655         }
++  656 
++  657         .language-bar {
++  658             height: 6px;
++  659             background: var(--border);
++  660             border-radius: 3px;
++  661             margin-top: 1rem;
++  662             overflow: hidden;
++  663         }
++  664 
++  665         .language-bar-fill {
++  666             height: 100%;
++  667             background: var(--gradient);
++  668             border-radius: 3px;
++  669         }
++  670 
++  671         /* Contact Section */
++  672         #contact {
++  673             background: linear-gradient(180deg, var(--bg-soft) 0%, var(--bg-light) 100%);
++  674             max-width: 100%;
++  675             padding: 5rem 2rem;
++  676         }
++  677 
++  678         .contact-wrapper {
++  679             max-width: 1200px;
++  680             margin: 0 auto;
++  681         }
++  682 
++  683         .contact-content {
++  684             display: grid;
++  685             grid-template-columns: 1fr 1fr;
++  686             gap: 3rem;
++  687             align-items: start;
++  688         }
++  689 
++  690         .contact-info {
++  691             display: flex;
++  692             flex-direction: column;
++  693             gap: 1.5rem;
++  694         }
++  695 
++  696         .contact-item {
++  697             display: flex;
++  698             align-items: center;
++  699             gap: 1rem;
++  700             color: var(--text);
++  701             text-decoration: none;
++  702             transition: all 0.3s;
++  703             padding: 1rem;
++  704             background: var(--bg-card);
++  705             border-radius: 12px;
++  706             box-shadow: var(--shadow);
++  707             border: 1px solid var(--border);
++  708         }
++  709 
++  710         .contact-item:hover {
++  711             color: var(--primary);
++  712             transform: translateX(10px);
++  713             border-color: var(--primary-light);
++  714         }
++  715 
++  716         .contact-item i {
++  717             width: 50px;
++  718             height: 50px;
++  719             background: var(--gradient);
++  720             border-radius: 12px;
++  721             display: flex;
++  722             align-items: center;
++  723             justify-content: center;
++  724             font-size: 1.2rem;
++  725             color: white;
++  726             flex-shrink: 0;
++  727         }
++  728 
++  729         .contact-item span {
++  730             font-weight: 600;
++  731         }
++  732 
++  733         .contact-form {
++  734             background: var(--bg-card);
++  735             padding: 2rem;
++  736             border-radius: 20px;
++  737             box-shadow: var(--shadow-lg);
++  738             border: 1px solid var(--border);
++  739         }
++  740 
++  741         .form-group {
++  742             margin-bottom: 1.5rem;
++  743         }
++  744 
++  745         .form-group label {
++  746             display: block;
++  747             color: var(--text-dark);
++  748             margin-bottom: 0.5rem;
++  749             font-weight: 600;
++  750         }
++  751 
++  752         .form-group input,
++  753         .form-group textarea {
++  754             width: 100%;
++  755             padding: 0.9rem 1rem;
++  756             background: var(--bg-soft);
++  757             border: 2px solid var(--border);
++  758             border-radius: 10px;
++  759             color: var(--text-dark);
++  760             font-family: 'Source Sans Pro', sans-serif;
++  761             font-size: 1rem;
++  762             transition: all 0.3s;
++  763         }
++  764 
++  765         .form-group input:focus,
++  766         .form-group textarea:focus {
++  767             outline: none;
++  768             border-color: var(--primary);
++  769             background: var(--bg-light);
++  770         }
++  771 
++  772         .form-group textarea {
++  773             resize: vertical;
++  774             min-height: 120px;
++  775         }
++  776 
++  777         /* Footer */
++  778         footer {
++  779             text-align: center;
++  780             padding: 3rem 2rem;
++  781             background: var(--secondary);
++  782             color: white;
++  783         }
++  784 
++  785         .social-links {
++  786             display: flex;
++  787             justify-content: center;
++  788             gap: 1rem;
++  789             margin-bottom: 1.5rem;
++  790         }
++  791 
++  792         .social-links a {
++  793             width: 50px;
++  794             height: 50px;
++  795             background: rgba(255, 255, 255, 0.1);
++  796             border-radius: 50%;
++  797             display: flex;
++  798             align-items: center;
++  799             justify-content: center;
++  800             color: white;
++  801             font-size: 1.2rem;
++  802             transition: all 0.3s;
++  803         }
++  804 
++  805         .social-links a:hover {
++  806             background: var(--primary);
++  807             transform: translateY(-5px);
++  808         }
++  809 
++  810         .copyright {
++  811             color: rgba(255, 255, 255, 0.6);
++  812             font-size: 0.9rem;
++  813         }
++  814 
++  815         /* Responsive */
++  816         @media (max-width: 900px) {
++  817             .hero-content {
++  818                 grid-template-columns: 1fr;
++  819                 text-align: center;
++  820                 gap: 3rem;
++  821             }
++  822 
++  823             .hero-text {
++  824                 order: 2;
++  825             }
++  826 
++  827             .hero-image {
++  828                 order: 1;
++  829             }
++  830 
++  831             .hero-name {
++  832                 font-size: 2.5rem;
++  833             }
++  834 
++  835             .hero-title {
++  836                 font-size: 1.2rem;
++  837             }
++  838 
++  839             .hero-desc {
++  840                 margin: 0 auto 2rem;
++  841             }
++  842 
++  843             .hero-buttons {
++  844                 justify-content: center;
++  845             }
++  846 
++  847             .profile-container {
++  848                 width: 280px;
++  849                 height: 280px;
++  850             }
++  851 
++  852             .nav-links {
++  853                 display: none;
++  854                 position: absolute;
++  855                 top: 100%;
++  856                 left: 0;
++  857                 right: 0;
++  858                 background: white;
++  859                 flex-direction: column;
++  860                 padding: 1.5rem 2rem;
++  861                 gap: 1rem;
++  862                 box-shadow: var(--shadow-lg);
++  863             }
++  864 
++  865             .nav-links.active {
++  866                 display: flex;
++  867             }
++  868 
++  869             .menu-toggle {
++  870                 display: block;
++  871             }
++  872 
++  873             .contact-content {
++  874                 grid-template-columns: 1fr;
++  875             }
++  876 
++  877             .section-title {
++  878                 font-size: 2rem;
++  879             }
++  880 
++  881             .projects-grid {
++  882                 grid-template-columns: 1fr;
++  883             }
++  884         }
++  885 
++  886         @media (max-width: 480px) {
++  887             .hero-name {
++  888                 font-size: 2rem;
++  889             }
++  890 
++  891             section {
++  892                 padding: 3rem 1rem;
++  893             }
++  894 
++  895             .skills-grid,
++  896             .languages-grid {
++  897                 grid-template-columns: 1fr;
++  898             }
++  899         }
++  900 
++  901         /* Scroll Animations */
++  902         .fade-in {
++  903             opacity: 0;
++  904             transform: translateY(30px);
++  905             transition: all 0.6s ease-out;
++  906         }
++  907 
++  908         .fade-in.visible {
++  909             opacity: 1;
++  910             transform: translateY(0);
++  911         }
++  912 
++  913         /* Toast Notification */
++  914         .toast {
++  915             position: fixed;
++  916             bottom: 2rem;
++  917             right: 2rem;
++  918             background: var(--bg-card);
++  919             color: var(--text-dark);
++  920             padding: 1rem 2rem;
++  921             border-radius: 12px;
++  922             border-left: 4px solid var(--primary);
++  923             box-shadow: var(--shadow-lg);
++  924             transform: translateY(100px);
++  925             opacity: 0;
++  926             transition: all 0.3s;
++  927             z-index: 2000;
++  928         }
++  929 
++  930         .toast.show {
++  931             transform: translateY(0);
++  932             opacity: 1;
++  933         }
++  934     </style>
++  935 </head>
++  936 <body>
++  937     <div class="bg-decoration"></div>
++  938 
++  939     <!-- Navigation -->
++  940     <nav>
++  941         <a href="#" class="logo">Youness<span>.</span></a>
++  942         <ul class="nav-links">
++  943             <li><a href="#about">À propos</a></li>
++  944             <li><a href="#skills">Compétences</a></li>
++  945             <li><a href="#experience">Expériences</a></li>
++  946             <li><a href="#projects">Projets</a></li>
++  947             <li><a href="#education">Formation</a></li>
++  948             <li><a href="#contact">Contact</a></li>
++  949         </ul>
++  950         <div class="menu-toggle" onclick="toggleMenu()">
++  951             <i class="fas fa-bars"></i>
++  952         </div>
++  953     </nav>
++  954 
++  955     <!-- Hero Section -->
++  956     <section class="hero" id="about">
++  957         <div class="hero-content">
++  958             <div class="hero-text">
++  959                 <p class="hero-greeting">👋 Bonjour, je suis</p>
++  960                 <h1 class="hero-name">Youness OUHADDOU</h1>
++  961                 <h2 class="hero-title">Futur Ingénieur en Génie Mécatronique & Systèmes Intelligents</h2>
++  962                 <p class="hero-desc">
++  963                     Étudiant ingénieur à l'ENSA de Berrechid, passionné par les systèmes embarqués, l'IoT et l'intelligence artificielle appliquée à l'industrie 4.0. À la recherche d'un stage de fin d'études (PFE).
++  964                 </p>
++  965                 <div class="hero-buttons">
++  966                     <a href="#contact" class="btn btn-primary">
++  967                         <i class="fas fa-paper-plane"></i> Me Contacter
++  968                     </a>
++  969                     <a href="#projects" class="btn btn-outline">
++  970                         <i class="fas fa-folder-open"></i> Mes Projets
++  971                     </a>
++  972                 </div>
++  973             </div>
++  974             <div class="hero-image">
++  975                 <div class="profile-container">
++  976                     <div class="profile-bg"></div>
++  977                     <div class="profile-photo-wrapper">
++  978                         <!-- ============================================
++  979                              VOTRE PHOTO DE PROFIL
++  980                              ============================================
++  981                              Remplacez "photo.jpg" par le chemin de votre photo
++  982                              Exemple: src="photo.jpg" ou src="images/ma-photo.jpg"
++  983                         -->
++  984                         <img class="profile-photo" src="Youness_ouhaddou.png" alt="Youness OUHADDOU" 
++  985                              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
++  986                         <div class="profile-placeholder" style="display:none;">
++  987                             <i class="fas fa-user"></i>
++  988                         </div>
++  989                     </div>
++  990                 </div>
++  991             </div>
++  992         </div>
++  993     </section>
++  994 
++  995     <!-- Skills Section -->
++  996     <section id="skills">
++  997         <h2 class="section-title fade-in">Compétences Techniques</h2>
++  998         <p class="section-subtitle fade-in">Technologies et outils que je maîtrise</p>
++  999         <div class="skills-grid">
++ 1000             <div class="skill-card fade-in">
++ 1001                 <h3><i class="fas fa-code"></i> Langages</h3>
++ 1002                 <div class="skill-tags">
++ 1003                     <span class="skill-tag">C</span>
++ 1004                     <span class="skill-tag">C++</span>
++ 1005                     <span class="skill-tag">Python</span>
++ 1006                     <span class="skill-tag">MySQL</span>
++ 1007                     <span class="skill-tag">VHDL</span>
++ 1008                 </div>
++ 1009             </div>
++ 1010             <div class="skill-card fade-in">
++ 1011                 <h3><i class="fas fa-microchip"></i> Systèmes Embarqués</h3>
++ 1012                 <div class="skill-tags">
++ 1013                     <span class="skill-tag">Raspberry Pi</span>
++ 1014                     <span class="skill-tag">ESP32</span>
++ 1015                     <span class="skill-tag">Arduino</span>
++ 1016                     <span class="skill-tag">Linux embarqué</span>
++ 1017                     <span class="skill-tag">FPGA</span>
++ 1018                 </div>
++ 1019             </div>
++ 1020             <div class="skill-card fade-in">
++ 1021                 <h3><i class="fas fa-network-wired"></i> IoT & Supervision</h3>
++ 1022                 <div class="skill-tags">
++ 1023                     <span class="skill-tag">Node-RED</span>
++ 1024                     <span class="skill-tag">Grafana</span>
++ 1025                     <span class="skill-tag">Streamlit</span>
++ 1026                     <span class="skill-tag">InfluxDB</span>
++ 1027                 </div>
++ 1028             </div>
++ 1029             <div class="skill-card fade-in">
++ 1030                 <h3><i class="fas fa-car"></i> Concepts Automatique</h3>
++ 1031                 <div class="skill-tags">
++ 1032                     <span class="skill-tag">AUTOSAR</span>
++ 1033                     <span class="skill-tag">ADAS</span>
++ 1034                     <span class="skill-tag">RTOS</span>
++ 1035                 </div>
++ 1036             </div>
++ 1037             <div class="skill-card fade-in">
++ 1038                 <h3><i class="fas fa-plug"></i> Bus de Communication</h3>
++ 1039                 <div class="skill-tags">
++ 1040                     <span class="skill-tag">UART</span>
++ 1041                     <span class="skill-tag">SPI</span>
++ 1042                     <span class="skill-tag">I2C</span>
++ 1043                     <span class="skill-tag">CAN</span>
++ 1044                 </div>
++ 1045             </div>
++ 1046             <div class="skill-card fade-in">
++ 1047                 <h3><i class="fas fa-brain"></i> IA & Vision</h3>
++ 1048                 <div class="skill-tags">
++ 1049                     <span class="skill-tag">TensorFlow</span>
++ 1050                     <span class="skill-tag">OpenCV</span>
++ 1051                     <span class="skill-tag">CNN</span>
++ 1052                 </div>
++ 1053             </div>
++ 1054             <div class="skill-card fade-in">
++ 1055                 <h3><i class="fas fa-globe"></i> Protocoles</h3>
++ 1056                 <div class="skill-tags">
++ 1057                     <span class="skill-tag">HTTP</span>
++ 1058                     <span class="skill-tag">REST</span>
++ 1059                     <span class="skill-tag">MQTT</span>
++ 1060                     <span class="skill-tag">TCP/UDP</span>
++ 1061                 </div>
++ 1062             </div>
++ 1063             <div class="skill-card fade-in">
++ 1064                 <h3><i class="fas fa-tools"></i> Outils</h3>
++ 1065                 <div class="skill-tags">
++ 1066                     <span class="skill-tag">VS Code</span>
++ 1067                     <span class="skill-tag">MATLAB/Simulink</span>
++ 1068                     <span class="skill-tag">Proteus</span>
++ 1069                     <span class="skill-tag">SolidWorks</span>
++ 1070                     <span class="skill-tag">Ansys</span>
++ 1071                 </div>
++ 1072             </div>
++ 1073         </div>
++ 1074     </section>
++ 1075 
++ 1076     <!-- Experience Section -->
++ 1077     <section id="experience">
++ 1078         <h2 class="section-title fade-in">Expériences Professionnelles</h2>
++ 1079         <p class="section-subtitle fade-in">Mon parcours professionnel</p>
++ 1080         <div class="timeline">
++ 1081             <div class="timeline-item fade-in">
++ 1082                 <div class="timeline-card">
++ 1083                     <span class="timeline-date">Août 2025 - Octobre 2025</span>
++ 1084                     <h3 class="timeline-title">Stage PFA</h3>
++ 1085                     <p class="timeline-company"><i class="fas fa-building"></i> Hirschmann Automotive</p>
++ 1086                     <div class="timeline-desc">
++ 1087                         <ul>
++ 1088                             <li>Mise en place d'un système de supervision IoT sur Raspberry Pi avec capteurs</li>
++ 1089                             <li>Développement d'une interface de visualisation temps réel (Grafana / Node-RED)</li>
++ 1090                             <li>Application d'analyse des indicateurs MTBF, MTTR, TRS, Pareto, Ishikawa</li>
++ 1091                         </ul>
++ 1092                     </div>
++ 1093                 </div>
++ 1094             </div>
++ 1095             <div class="timeline-item fade-in">
++ 1096                 <div class="timeline-card">
++ 1097                     <span class="timeline-date">Juillet 2024 - Août 2024</span>
++ 1098                     <h3 class="timeline-title">Stage d'initiation</h3>
++ 1099                     <p class="timeline-company"><i class="fas fa-university"></i> École Centrale Casablanca</p>
++ 1100                     <div class="timeline-desc">
++ 1101                         <ul>
++ 1102                             <li>Développement d'un système d'analyse du gisement éolien</li>
++ 1103                             <li>Réalisation d'une étude aérodynamique du système de conversion éolien</li>
++ 1104                             <li>Conception d'une pale verticale pour un usage domestique</li>
++ 1105                         </ul>
++ 1106                     </div>
++ 1107                 </div>
++ 1108             </div>
++ 1109         </div>
++ 1110     </section>
++ 1111 
++ 1112     <!-- Projects Section -->
++ 1113     <section id="projects">
++ 1114         <h2 class="section-title fade-in">Projets Académiques</h2>
++ 1115         <p class="section-subtitle fade-in">Découvrez mes réalisations</p>
++ 1116         <div class="projects-grid">
++ 1117 
++ 1118             <!-- =============================================
++ 1119                  PROJET 1 - AVEC IMAGE
++ 1120                  =============================================
++ 1121                  Pour ajouter une image:
++ 1122                  1. Mettez votre image dans le dossier "images/"
++ 1123                  2. Remplacez le contenu de project-image par:
++ 1124                     <img src="images/nom-de-votre-image.jpg" alt="Description">
++ 1125             -->
++ 1126             <div class="project-card fade-in">
++ 1127                 <div class="project-image">
++ 1128                     <!-- Remplacez cette div par votre image: -->
++ 1129                     <!-- <img src="images/projet-linux.jpg" alt="Système Linux embarqué"> -->
++ 1130                     <div class="project-image-placeholder">
++ 1131                         <i class="fab fa-linux"></i>
++ 1132                         <span>images/projet-linux.jpg</span>
++ 1133                     </div>
++ 1134                 </div>
++ 1135                 <div class="project-content">
++ 1136                     <h3 class="project-title">Système d'exploitation embarqué Linux</h3>
++ 1137                     <p class="project-desc">
++ 1138                         Développement d'un système Linux embarqué minimaliste pour ARM (U-Boot, Kernel, BusyBox), avec cross-compilation via Crosstool-NG, gestion des Device Tree, et émulation sous QEMU.
++ 1139                     </p>
++ 1140                     <div class="project-tech">
++ 1141                         <span>Linux</span>
++ 1142                         <span>ARM</span>
++ 1143                         <span>QEMU</span>
++ 1144                         <span>U-Boot</span>
++ 1145                     </div>
++ 1146                 </div>
++ 1147             </div>
++ 1148 
++ 1149             <!-- PROJET 2 -->
++ 1150             <div class="project-card fade-in">
++ 1151                 <div class="project-image">
++ 1152                     <!-- <img src="images/projet-robot.jpg" alt="Robot agricole"> -->
++ 1153                     <div class="project-image-placeholder">
++ 1154                         <i class="fas fa-robot"></i>
++ 1155                         <span>images/projet-robot.jpg</span>
++ 1156                     </div>
++ 1157                 </div>
++ 1158                 <div class="project-content">
++ 1159                     <h3 class="project-title">Station Météo & Robot de Surveillance Agricole</h3>
++ 1160                     <p class="project-desc">
++ 1161                         Solution IoT agricole complète avec capteurs, irrigation intelligente, prédiction météo par IA sur Raspberry Pi, robot mobile téléopéré avec double caméra et surveillance en temps réel.
++ 1162                     </p>
++ 1163                     <div class="project-tech">
++ 1164                         <span>Raspberry Pi</span>
++ 1165                         <span>IoT</span>
++ 1166                         <span>IA</span>
++ 1167                         <span>Python</span>
++ 1168                     </div>
++ 1169                 </div>
++ 1170             </div>
++ 1171 
++ 1172             <!-- PROJET 3 -->
++ 1173             <div class="project-card fade-in">
++ 1174                 <div class="project-image">
++ 1175                     <!-- <img src="images/projet-maison.jpg" alt="Maison intelligente"> -->
++ 1176                     <div class="project-image-placeholder">
++ 1177                         <i class="fas fa-home"></i>
++ 1178                         <span>images/projet-maison.jpg</span>
++ 1179                     </div>
++ 1180                 </div>
++ 1181                 <div class="project-content">
++ 1182                     <h3 class="project-title">Maison Intelligente</h3>
++ 1183                     <p class="project-desc">
++ 1184                         Contrôle des lumières et appareils à distance avec une application mobile, installation de capteurs pour détecter les intrusions, la température et la fumée, avec système d'alerte.
++ 1185                     </p>
++ 1186                     <div class="project-tech">
++ 1187                         <span>ESP32</span>
++ 1188                         <span>Mobile App</span>
++ 1189                         <span>Capteurs</span>
++ 1190                         <span>IoT</span>
++ 1191                     </div>
++ 1192                 </div>
++ 1193             </div>
++ 1194 
++ 1195             <!-- PROJET 4 -->
++ 1196             <div class="project-card fade-in">
++ 1197                 <div class="project-image">
++ 1198                     <!-- <img src="images/projet-rfid.jpg" alt="Casiers RFID"> -->
++ 1199                     <div class="project-image-placeholder">
++ 1200                         <i class="fas fa-lock"></i>
++ 1201                         <span>images/projet-rfid.jpg</span>
++ 1202                     </div>
++ 1203                 </div>
++ 1204                 <div class="project-content">
++ 1205                     <h3 class="project-title">Casiers Sécurisés RFID</h3>
++ 1206                     <p class="project-desc">
++ 1207                         Conception et réalisation d'un système de casiers sécurisés utilisant une carte Arduino Uno et une carte RFID. Programmation et intégration du système électronique pour contrôler l'accès.
++ 1208                     </p>
++ 1209                     <div class="project-tech">
++ 1210                         <span>Arduino</span>
++ 1211                         <span>RFID</span>
++ 1212                         <span>C++</span>
++ 1213                         <span>Électronique</span>
++ 1214                     </div>
++ 1215                 </div>
++ 1216             </div>
++ 1217 
++ 1218             <!-- =============================================
++ 1219                  TEMPLATE POUR AJOUTER UN NOUVEAU PROJET
++ 1220                  =============================================
++ 1221                  Copiez ce bloc et collez-le ici pour ajouter un nouveau projet:
++ 1222                  
++ 1223             <div class="project-card fade-in">
++ 1224                 <div class="project-image">
++ 1225                     <img src="images/votre-image.jpg" alt="Description du projet">
++ 1226                 </div>
++ 1227                 <div class="project-content">
++ 1228                     <h3 class="project-title">Titre de votre projet</h3>
++ 1229                     <p class="project-desc">
++ 1230                         Description détaillée de votre projet...
++ 1231                     </p>
++ 1232                     <div class="project-tech">
++ 1233                         <span>Tech1</span>
++ 1234                         <span>Tech2</span>
++ 1235                         <span>Tech3</span>
++ 1236                     </div>
++ 1237                 </div>
++ 1238             </div>
++ 1239             -->
++ 1240 
++ 1241         </div>
++ 1242     </section>
++ 1243 
++ 1244     <!-- Education Section -->
++ 1245     <section id="education">
++ 1246         <h2 class="section-title fade-in">Parcours Académique</h2>
++ 1247         <p class="section-subtitle fade-in">Ma formation</p>
++ 1248         <div class="education-grid">
++ 1249             <div class="education-card fade-in">
++ 1250                 <span class="education-year">2023 - 2026</span>
++ 1251                 <h3 class="education-title">Cycle d'Ingénieur - Génie Mécatronique et Systèmes Intelligents</h3>
++ 1252                 <p class="education-school"><i class="fas fa-graduation-cap"></i> ENSA Berrechid</p>
++ 1253             </div>
++ 1254             <div class="education-card fade-in">
++ 1255                 <span class="education-year">2021 - 2023</span>
++ 1256                 <h3 class="education-title">Licence : Sciences de la Matière Physique - Option Électronique</h3>
++ 1257                 <p class="education-school"><i class="fas fa-graduation-cap"></i> Université Hassan II, FS Ain Chock</p>
++ 1258             </div>
++ 1259             <div class="education-card fade-in">
++ 1260                 <span class="education-year">2019 - 2020</span>
++ 1261                 <h3 class="education-title">Baccalauréat : Sciences Expérimentales - Option Sciences Physiques</h3>
++ 1262                 <p class="education-school"><i class="fas fa-graduation-cap"></i> Lycée Qualifiant Taoufik Hakim</p>
++ 1263             </div>
++ 1264         </div>
++ 1265     </section>
++ 1266 
++ 1267     <!-- Languages Section -->
++ 1268     <section id="languages">
++ 1269         <h2 class="section-title fade-in">Langues</h2>
++ 1270         <p class="section-subtitle fade-in">Mes compétences linguistiques</p>
++ 1271         <div class="languages-grid">
++ 1272             <div class="language-card fade-in">
++ 1273                 <div class="language-flag">🇲🇦</div>
++ 1274                 <h3 class="language-name">Arabe</h3>
++ 1275                 <p class="language-level">Maternelle</p>
++ 1276                 <div class="language-bar">
++ 1277                     <div class="language-bar-fill" style="width: 100%;"></div>
++ 1278                 </div>
++ 1279             </div>
++ 1280             <div class="language-card fade-in">
++ 1281                 <div class="language-flag">ⵣ</div>
++ 1282                 <h3 class="language-name">Tamazight</h3>
++ 1283                 <p class="language-level">Maternelle</p>
++ 1284                 <div class="language-bar">
++ 1285                     <div class="language-bar-fill" style="width: 100%;"></div>
++ 1286                 </div>
++ 1287             </div>
++ 1288             <div class="language-card fade-in">
++ 1289                 <div class="language-flag">🇬🇧</div>
++ 1290                 <h3 class="language-name">English</h3>
++ 1291                 <p class="language-level">Upper-Intermediate</p>
++ 1292                 <div class="language-bar">
++ 1293                     <div class="language-bar-fill" style="width: 75%;"></div>
++ 1294                 </div>
++ 1295             </div>
++ 1296             <div class="language-card fade-in">
++ 1297                 <div class="language-flag">🇫🇷</div>
++ 1298                 <h3 class="language-name">Français</h3>
++ 1299                 <p class="language-level">Intermédiaire</p>
++ 1300                 <div class="language-bar">
++ 1301                     <div class="language-bar-fill" style="width: 60%;"></div>
++ 1302                 </div>
++ 1303             </div>
++ 1304         </div>
++ 1305     </section>
++ 1306 
++ 1307     <!-- Contact Section -->
++ 1308     <section id="contact">
++ 1309         <div class="contact-wrapper">
++ 1310             <h2 class="section-title fade-in">Me Contacter</h2>
++ 1311             <p class="section-subtitle fade-in">N'hésitez pas à me contacter pour toute opportunité</p>
++ 1312             <div class="contact-content">
++ 1313                 <div class="contact-info fade-in">
++ 1314                     <a href="mailto:youness.ouha25@gmail.com" class="contact-item">
++ 1315                         <i class="fas fa-envelope"></i>
++ 1316                         <span>youness.ouha25@gmail.com</span>
++ 1317                     </a>
++ 1318                     <a href="tel:+212611868230" class="contact-item">
++ 1319                         <i class="fas fa-phone"></i>
++ 1320                         <span>+212 611 868 230</span>
++ 1321                     </a>
++ 1322                     <div class="contact-item">
++ 1323                         <i class="fas fa-map-marker-alt"></i>
++ 1324                         <span>Nouaceur, Casablanca, Maroc</span>
++ 1325                     </div>
++ 1326                     <a href="https://www.linkedin.com/in/youness-ouhaddou-a5074a2b8/" target="_blank" class="contact-item">
++ 1327                         <i class="fab fa-linkedin"></i>
++ 1328                         <span>LinkedIn Profile</span>
++ 1329                     </a>
++ 1330                     <a href="https://github.com/youness-ouhaddou" target="_blank" class="contact-item">
++ 1331                         <i class="fab fa-github"></i>
++ 1332                         <span>GitHub Profile</span>
++ 1333                     </a>
++ 1334                 </div>
++ 1335                 <form class="contact-form fade-in" onsubmit="handleSubmit(event)">
++ 1336                     <div class="form-group">
++ 1337                         <label for="name">Nom complet</label>
++ 1338                         <input type="text" id="name" name="name" required placeholder="Votre nom">
++ 1339                     </div>
++ 1340                     <div class="form-group">
++ 1341                         <label for="email">Email</label>
++ 1342                         <input type="email" id="email" name="email" required placeholder="votre@email.com">
++ 1343                     </div>
++ 1344                     <div class="form-group">
++ 1345                         <label for="message">Message</label>
++ 1346                         <textarea id="message" name="message" required placeholder="Votre message..."></textarea>
++ 1347                     </div>
++ 1348                     <button type="submit" class="btn btn-primary" style="width: 100%;">
++ 1349                         <i class="fas fa-paper-plane"></i> Envoyer le message
++ 1350                     </button>
++ 1351                 </form>
++ 1352             </div>
++ 1353         </div>
++ 1354     </section>
++ 1355 
++ 1356     <!-- Footer -->
++ 1357     <footer>
++ 1358         <div class="social-links">
++ 1359             <a href="https://www.linkedin.com/in/youness-ouhaddou-a5074a2b8/" target="_blank" aria-label="LinkedIn">
++ 1360                 <i class="fab fa-linkedin-in"></i>
++ 1361             </a>
++ 1362             <a href="https://github.com/youness-ouhaddou" target="_blank" aria-label="GitHub">
++ 1363                 <i class="fab fa-github"></i>
++ 1364             </a>
++ 1365             <a href="mailto:youness.ouha25@gmail.com" aria-label="Email">
++ 1366                 <i class="fas fa-envelope"></i>
++ 1367             </a>
++ 1368         </div>
++ 1369         <p class="copyright">© 2025 Youness OUHADDOU. Tous droits réservés.</p>
++ 1370     </footer>
++ 1371 
++ 1372     <!-- Toast Notification -->
++ 1373     <div class="toast" id="toast"></div>
++ 1374 
++ 1375     <script>
++ 1376         // Mobile Menu Toggle
++ 1377         function toggleMenu() {
++ 1378             document.querySelector('.nav-links').classList.toggle('active');
++ 1379         }
++ 1380 
++ 1381         // Close menu when clicking a link
++ 1382         document.querySelectorAll('.nav-links a').forEach(link => {
++ 1383             link.addEventListener('click', () => {
++ 1384                 document.querySelector('.nav-links').classList.remove('active');
++ 1385             });
++ 1386         });
++ 1387 
++ 1388         // Scroll Animations
++ 1389         const observerOptions = {
++ 1390             threshold: 0.1,
++ 1391             rootMargin: '0px 0px -50px 0px'
++ 1392         };
++ 1393 
++ 1394         const observer = new IntersectionObserver((entries) => {
++ 1395             entries.forEach(entry => {
++ 1396                 if (entry.isIntersecting) {
++ 1397                     entry.target.classList.add('visible');
++ 1398                 }
++ 1399             });
++ 1400         }, observerOptions);
++ 1401 
++ 1402         document.querySelectorAll('.fade-in').forEach(el => {
++ 1403             observer.observe(el);
++ 1404         });
++ 1405 
++ 1406         // Form Submission Handler
++ 1407         function handleSubmit(event) {
++ 1408             event.preventDefault();
++ 1409 
++ 1410             const name = document.getElementById('name').value;
++ 1411             const email = document.getElementById('email').value;
++ 1412             const message = document.getElementById('message').value;
++ 1413 
++ 1414             // Create mailto link
++ 1415             const mailtoLink = `mailto:youness.ouha25@gmail.com?subject=Portfolio Contact - ${encodeURIComponent(name)}&body=${encodeURIComponent(`De: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
++ 1416 
++ 1417             window.open(mailtoLink, '_blank');
++ 1418 
++ 1419             showToast('✉️ Redirection vers votre client email...');
++ 1420 
++ 1421             // Reset form
++ 1422             event.target.reset();
++ 1423         }
++ 1424 
++ 1425         // Toast Notification
++ 1426         function showToast(message) {
++ 1427             const toast = document.getElementById('toast');
++ 1428             toast.textContent = message;
++ 1429             toast.classList.add('show');
++ 1430 
++ 1431             setTimeout(() => {
++ 1432                 toast.classList.remove('show');
++ 1433             }, 3000);
++ 1434         }
++ 1435 
++ 1436         // Smooth scroll for anchor links
++ 1437         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
++ 1438             anchor.addEventListener('click', function (e) {
++ 1439                 e.preventDefault();
++ 1440                 const target = document.querySelector(this.getAttribute('href'));
++ 1441                 if (target) {
++ 1442                     target.scrollIntoView({
++ 1443                         behavior: 'smooth',
++ 1444                         block: 'start'
++ 1445                     });
++ 1446                 }
++ 1447             });
++ 1448         });
++ 1449     </script>
++ 1450 </body>
++ 1451 </html>
