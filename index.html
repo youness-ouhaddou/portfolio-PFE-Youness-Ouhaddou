@@ -2,78 +2,1349 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Youness Ouhaddou | Portfolio PFE</title>
-    <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youness OUHADDOU | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00d4aa;
+            --primary-dark: #00a383;
+            --secondary: #0a192f;
+            --accent: #64ffda;
+            --bg-dark: #020c1b;
+            --bg-card: #112240;
+            --text: #8892b0;
+            --text-light: #ccd6f6;
+            --gradient: linear-gradient(135deg, #00d4aa 0%, #00a383 50%, #006d5b 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(0, 212, 170, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(100, 255, 218, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(10, 25, 47, 0.9) 0%, var(--bg-dark) 100%);
+        }
+
+        .circuit-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10h80v80H10z' fill='none' stroke='%2300d4aa' stroke-width='0.5'/%3E%3Ccircle cx='10' cy='10' r='3' fill='%2300d4aa'/%3E%3Ccircle cx='90' cy='10' r='3' fill='%2300d4aa'/%3E%3Ccircle cx='10' cy='90' r='3' fill='%2300d4aa'/%3E%3Ccircle cx='90' cy='90' r='3' fill='%2300d4aa'/%3E%3Cpath d='M50 10v30M10 50h30M90 50h-30M50 90v-30' stroke='%2300d4aa' stroke-width='0.5'/%3E%3Ccircle cx='50' cy='50' r='5' fill='none' stroke='%2300d4aa' stroke-width='0.5'/%3E%3C/svg%3E");
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(2, 12, 27, 0.85);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 212, 170, 0.1);
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--text-light);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            align-items: center;
+        }
+
+        .hero-text {
+            animation: slideInLeft 1s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-greeting {
+            color: var(--primary);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .hero-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+        }
+
+        .hero-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: var(--secondary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(0, 212, 170, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Profile Photo */
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            animation: slideInRight 1s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .profile-container {
+            position: relative;
+            width: 320px;
+            height: 320px;
+        }
+
+        .profile-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 340px;
+            height: 340px;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+        }
+
+        .profile-ring::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        @keyframes rotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .profile-photo {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--bg-card);
+            box-shadow: 0 0 40px rgba(0, 212, 170, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-placeholder {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 4px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .profile-placeholder i {
+            font-size: 8rem;
+            color: var(--primary);
+            opacity: 0.5;
+        }
+
+        .profile-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 50px;
+            height: 3px;
+            background: var(--gradient);
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(0, 212, 170, 0.2);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid rgba(0, 212, 170, 0.1);
+            transition: all 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.1);
+        }
+
+        .skill-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(0, 212, 170, 0.1);
+            color: var(--accent);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+        }
+
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary), transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0;
+            width: 14px;
+            height: 14px;
+            background: var(--primary);
+            border-radius: 50%;
+            transform: translateX(-6px);
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        .timeline-date {
+            color: var(--primary);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.4rem;
+            color: var(--text-light);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-company {
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+        }
+
+        .timeline-desc {
+            color: var(--text);
+            font-size: 1rem;
+        }
+
+        .timeline-desc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .timeline-desc li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-desc li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 212, 170, 0.1);
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 212, 170, 0.15);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--bg-card) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image i {
+            font-size: 4rem;
+            color: var(--primary);
+            opacity: 0.3;
+        }
+
+        .project-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 212, 170, 0.1) 0%, transparent 100%);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 0.8rem;
+        }
+
+        .project-desc {
+            color: var(--text);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .project-tech span {
+            background: rgba(0, 212, 170, 0.1);
+            color: var(--accent);
+            padding: 0.2rem 0.6rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+        }
+
+        /* Education Section */
+        .education-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .education-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s;
+        }
+
+        .education-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.1);
+        }
+
+        .education-year {
+            color: var(--primary);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .education-title {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            font-weight: 600;
+            margin: 0.5rem 0;
+        }
+
+        .education-school {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        /* Languages Section */
+        .languages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .language-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(0, 212, 170, 0.1);
+            transition: all 0.3s;
+        }
+
+        .language-card:hover {
+            border-color: var(--primary);
+        }
+
+        .language-name {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .language-level {
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .language-bar {
+            height: 4px;
+            background: rgba(0, 212, 170, 0.2);
+            border-radius: 2px;
+            margin-top: 0.8rem;
+            overflow: hidden;
+        }
+
+        .language-bar-fill {
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 2px;
+            transition: width 1s ease-out;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            color: var(--primary);
+            transform: translateX(10px);
+        }
+
+        .contact-item i {
+            width: 50px;
+            height: 50px;
+            background: var(--bg-card);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--primary);
+            border: 1px solid rgba(0, 212, 170, 0.2);
+        }
+
+        .contact-form {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 212, 170, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--bg-dark);
+            border: 1px solid rgba(0, 212, 170, 0.2);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(0, 212, 170, 0.1);
+            margin-top: 3rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: var(--bg-card);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            border: 1px solid rgba(0, 212, 170, 0.2);
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 212, 170, 0.2);
+        }
+
+        .copyright {
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .hero-text {
+                order: 2;
+            }
+
+            .hero-image {
+                order: 1;
+            }
+
+            .hero-name {
+                font-size: 2.5rem;
+            }
+
+            .hero-title {
+                font-size: 1.4rem;
+            }
+
+            .hero-desc {
+                margin: 0 auto 2rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .profile-container {
+                width: 250px;
+                height: 250px;
+            }
+
+            .profile-placeholder,
+            .profile-photo {
+                width: 230px;
+                height: 230px;
+            }
+
+            .profile-ring {
+                width: 260px;
+                height: 260px;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(2, 12, 27, 0.98);
+                flex-direction: column;
+                padding: 1rem 2rem;
+                gap: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-name {
+                font-size: 2rem;
+            }
+
+            .hero-title {
+                font-size: 1.2rem;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+
+            .skills-grid,
+            .languages-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--bg-card);
+            color: var(--text-light);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.2);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
+    <div class="bg-animation"></div>
+    <div class="circuit-pattern"></div>
 
-<header>
-    <h1>Youness OUHADDOU</h1>
-    <p>Futur ingénieur en Mécatronique & Systèmes Intelligents</p>
-    <p>📍 Casablanca | 📧 youness.ouha25@gmail.com</p>
-    <a href="https://github.com/TON_USERNAME" target="_blank">GitHub</a> |
-    <a href="https://www.linkedin.com/in/TON_LINKEDIN" target="_blank">LinkedIn</a>
-</header>
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">Y<span>O</span></a>
+        <ul class="nav-links">
+            <li><a href="#about">À propos</a></li>
+            <li><a href="#skills">Compétences</a></li>
+            <li><a href="#experience">Expériences</a></li>
+            <li><a href="#projects">Projets</a></li>
+            <li><a href="#education">Formation</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
 
-<section>
-    <h2>👨‍💻 Profil</h2>
-    <p>
-        Étudiant ingénieur à l’ENSA de Berrechid, passionné par les systèmes embarqués,
-        l’IoT et l’intelligence artificielle appliquée à l’industrie 4.0.
-        À la recherche d’un stage PFE.
-    </p>
-</section>
+    <!-- Hero Section -->
+    <section class="hero" id="about">
+        <div class="hero-content">
+            <div class="hero-text">
+                <p class="hero-greeting">👋 BONJOUR, JE SUIS</p>
+                <h1 class="hero-name">Youness OUHADDOU</h1>
+                <h2 class="hero-title">Futur Ingénieur en Génie Mécatronique & Systèmes Intelligents</h2>
+                <p class="hero-desc">
+                    Étudiant ingénieur à l'ENSA de Berrechid, passionné par les systèmes embarqués, l'IoT et l'intelligence artificielle appliquée à l'industrie 4.0. À la recherche d'un stage de fin d'études (PFE).
+                </p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Me Contacter
+                    </a>
+                    <a href="#projects" class="btn btn-outline">
+                        <i class="fas fa-code"></i> Voir mes projets
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="profile-container">
+                    <div class="profile-ring"></div>
+                    <div class="profile-placeholder">
+                        <!-- Remplacez src par votre photo de profil -->
+                        <img src="Youness_ouhaddou.png" alt="Youness OUHADDOU" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-user\'></i>';">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section>
-    <h2>🛠️ Compétences techniques</h2>
-    <ul>
-        <li><b>Langages :</b> C, C++, Python, VHDL, MySQL</li>
-        <li><b>Embarqué :</b> Arduino, ESP32, Raspberry Pi, Linux embarqué, FPGA</li>
-        <li><b>IoT :</b> MQTT, Node-RED, Grafana, InfluxDB, REST</li>
-        <li><b>IA & Vision :</b> TensorFlow, OpenCV, CNN</li>
-        <li><b>Bus :</b> UART, SPI, I2C, CAN</li>
-    </ul>
-</section>
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title fade-in">Compétences Techniques</h2>
+        <div class="skills-grid">
+            <div class="skill-card fade-in">
+                <h3><i class="fas fa-code"></i> Langages</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">C</span>
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">MySQL</span>
+                    <span class="skill-tag">VHDL</span>
+                </div>
+            </div>
+            <div class="skill-card fade-in">
+                <h3><i class="fas fa-microchip"></i> Systèmes Embarqués</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Raspberry Pi</span>
+                    <span class="skill-tag">ESP32</span>
+                    <span class="skill-tag">Arduino</span>
+                    <span class="skill-tag">Linux embarqué</span>
+                    <span class="skill-tag">FPGA</span>
+                </div>
+            </div>
+            <div class="skill-card fade-in">
+                <h3><i class="fas fa-network-wired"></i> IoT & Supervision</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Node-RED</span>
+                    <span class="skill-tag">Grafana</span>
+                    <span class="skill-tag">Streamlit</span>
+                    <span class="skill-tag">InfluxDB</span>
+                </div>
+            </div>
+            <div class="skill-card fade-in">
+                <h3><i class="fas fa-car"></i> Concepts Automatique</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">AUTOSAR</span>
+                    <span class="skill-tag">ADAS</span>
+                    <span class="skill-tag">RTOS</span>
+                </div>
+            </div>
+            <div class="skill-card fade-in">
+                <h3><i class="fas fa-plug"></i> Bus de Communication</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">UART</span>
+                    <span class="skill-tag">SPI</span>
+                    <span class="skill-tag">I2C</span>
+                    <span class="skill-tag">CAN</span>
+                </div>
+            </div>
+            <div class="skill-card fade-in">
+                <h3><i class="fas fa-brain"></i> IA & Vision</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">TensorFlow</span>
+                    <span class="skill-tag">OpenCV</span>
+                    <span class="skill-tag">CNN</span>
+                </div>
+            </div>
+            <div class="skill-card fade-in">
+                <h3><i class="fas fa-globe"></i> Protocoles</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">HTTP</span>
+                    <span class="skill-tag">REST</span>
+                    <span class="skill-tag">MQTT</span>
+                    <span class="skill-tag">TCP/UDP</span>
+                </div>
+            </div>
+            <div class="skill-card fade-in">
+                <h3><i class="fas fa-tools"></i> Outils</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">VS Code</span>
+                    <span class="skill-tag">MATLAB/Simulink</span>
+                    <span class="skill-tag">Proteus</span>
+                    <span class="skill-tag">SolidWorks</span>
+                    <span class="skill-tag">Ansys</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section>
-    <h2>📌 Projets</h2>
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2 class="section-title fade-in">Expériences Professionnelles</h2>
+        <div class="timeline">
+            <div class="timeline-item fade-in">
+                <span class="timeline-date">Août 2025 - Octobre 2025</span>
+                <h3 class="timeline-title">Stage PFA</h3>
+                <p class="timeline-company">Hirschmann Automotive</p>
+                <div class="timeline-desc">
+                    <ul>
+                        <li>Mise en place d'un système de supervision IoT sur Raspberry Pi avec capteurs</li>
+                        <li>Développement d'une interface de visualisation temps réel (Grafana / Node-RED)</li>
+                        <li>Application d'analyse des indicateurs MTBF, MTTR, TRS, Pareto, Ishikawa</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item fade-in">
+                <span class="timeline-date">Juillet 2024 - Août 2024</span>
+                <h3 class="timeline-title">Stage d'initiation</h3>
+                <p class="timeline-company">École Centrale Casablanca</p>
+                <div class="timeline-desc">
+                    <ul>
+                        <li>Développement d'un système d'analyse du gisement éolien</li>
+                        <li>Réalisation d'une étude aérodynamique du système de conversion éolien</li>
+                        <li>Conception d'une pale verticale pour un usage domestique</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="project">
-        <h3>🌦️ Station météo & Robot agricole intelligent</h3>
-        <p>Solution IoT complète avec capteurs, irrigation intelligente et prédiction météo par IA sur Raspberry Pi.</p>
-        <p><b>Tech :</b> ESP32, Raspberry Pi, Python, MQTT, IA</p>
-    </div>
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title fade-in">Projets Académiques</h2>
+        <div class="projects-grid">
+            <div class="project-card fade-in">
+                <div class="project-image">
+                    <i class="fab fa-linux"></i>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Système d'exploitation embarqué Linux</h3>
+                    <p class="project-desc">
+                        Développement d'un système Linux embarqué minimaliste pour ARM (U-Boot, Kernel, BusyBox), avec cross-compilation via Crosstool-NG, gestion des Device Tree, et émulation sous QEMU.
+                    </p>
+                    <div class="project-tech">
+                        <span>Linux</span>
+                        <span>ARM</span>
+                        <span>QEMU</span>
+                        <span>U-Boot</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card fade-in">
+                <div class="project-image">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Station Météo & Robot de Surveillance Agricole</h3>
+                    <p class="project-desc">
+                        Solution IoT agricole complète avec capteurs, irrigation intelligente, prédiction météo par IA sur Raspberry Pi, robot mobile téléopéré avec double caméra et surveillance en temps réel.
+                    </p>
+                    <div class="project-tech">
+                        <span>Raspberry Pi</span>
+                        <span>IoT</span>
+                        <span>IA</span>
+                        <span>Python</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card fade-in">
+                <div class="project-image">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Maison Intelligente</h3>
+                    <p class="project-desc">
+                        Contrôle des lumières et appareils à distance avec une application mobile, installation de capteurs pour détecter les intrusions, la température et la fumée, avec système d'alerte.
+                    </p>
+                    <div class="project-tech">
+                        <span>ESP32</span>
+                        <span>Mobile App</span>
+                        <span>Capteurs</span>
+                        <span>IoT</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card fade-in">
+                <div class="project-image">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Casiers Sécurisés RFID</h3>
+                    <p class="project-desc">
+                        Conception et réalisation d'un système de casiers sécurisés utilisant une carte Arduino Uno et une carte RFID. Programmation et intégration du système électronique pour contrôler l'accès.
+                    </p>
+                    <div class="project-tech">
+                        <span>Arduino</span>
+                        <span>RFID</span>
+                        <span>C++</span>
+                        <span>Électronique</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="project">
-        <h3>🏭 Supervision IoT – Hirschmann Automotive</h3>
-        <p>Système de supervision industrielle avec Grafana et Node-RED.
-           Analyse MTBF, MTTR, TRS.</p>
-    </div>
+    <!-- Education Section -->
+    <section id="education">
+        <h2 class="section-title fade-in">Parcours Académique</h2>
+        <div class="education-grid">
+            <div class="education-card fade-in">
+                <span class="education-year">2023 - 2026</span>
+                <h3 class="education-title">Cycle d'Ingénieur - Génie Mécatronique et Systèmes Intelligents</h3>
+                <p class="education-school">ENSA Berrechid</p>
+            </div>
+            <div class="education-card fade-in">
+                <span class="education-year">2021 - 2023</span>
+                <h3 class="education-title">Licence : Sciences de la Matière Physique - Option Électronique</h3>
+                <p class="education-school">Université Hassan II, FS Ain Chock</p>
+            </div>
+            <div class="education-card fade-in">
+                <span class="education-year">2019 - 2020</span>
+                <h3 class="education-title">Baccalauréat : Sciences Expérimentales - Option Sciences Physiques</h3>
+                <p class="education-school">Lycée Qualifiant Taoufik Hakim</p>
+            </div>
+        </div>
+    </section>
 
-    <div class="project">
-        <h3>🐧 Linux embarqué pour ARM</h3>
-        <p>Développement d’un système Linux minimaliste (U-Boot, Kernel, BusyBox),
-           cross-compilation et émulation QEMU.</p>
-    </div>
+    <!-- Languages Section -->
+    <section id="languages">
+        <h2 class="section-title fade-in">Langues</h2>
+        <div class="languages-grid">
+            <div class="language-card fade-in">
+                <h3 class="language-name">🇲🇦 Arabe</h3>
+                <p class="language-level">Maternelle</p>
+                <div class="language-bar">
+                    <div class="language-bar-fill" style="width: 100%;"></div>
+                </div>
+            </div>
+            <div class="language-card fade-in">
+                <h3 class="language-name">ⵣ Tamazight</h3>
+                <p class="language-level">Maternelle</p>
+                <div class="language-bar">
+                    <div class="language-bar-fill" style="width: 100%;"></div>
+                </div>
+            </div>
+            <div class="language-card fade-in">
+                <h3 class="language-name">🇬🇧 English</h3>
+                <p class="language-level">Upper-Intermediate</p>
+                <div class="language-bar">
+                    <div class="language-bar-fill" style="width: 75%;"></div>
+                </div>
+            </div>
+            <div class="language-card fade-in">
+                <h3 class="language-name">🇫🇷 Français</h3>
+                <p class="language-level">Intermédiaire</p>
+                <div class="language-bar">
+                    <div class="language-bar-fill" style="width: 60%;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="project">
-        <h3>🔐 Casiers sécurisés RFID</h3>
-        <p>Système de contrôle d’accès avec Arduino et RFID pour plusieurs casiers.</p>
-    </div>
-</section>
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title fade-in">Me Contacter</h2>
+        <div class="contact-content">
+            <div class="contact-info fade-in">
+                <a href="mailto:youness.ouha25@gmail.com" class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>youness.ouha25@gmail.com</span>
+                </a>
+                <a href="tel:+212611868230" class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+212 611 868 230</span>
+                </a>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Nouaceur, Casablanca, Maroc</span>
+                </div>
+                <a href="https://www.linkedin.com/in/youness-ouhaddou" target="_blank" class="contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    <span>LinkedIn Profile</span>
+                </a>
+                <a href="https://github.com/youness-ouhaddou" target="_blank" class="contact-item">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub Profile</span>
+                </a>
+            </div>
+            <form class="contact-form fade-in" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Nom complet</label>
+                    <input type="text" id="name" name="name" required placeholder="Votre nom">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="votre@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required placeholder="Votre message..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-paper-plane"></i> Envoyer le message
+                </button>
+            </form>
+        </div>
+    </section>
 
-<section>
-    <h2>🎯 Objectif PFE</h2>
-    <p>
-        Intégrer une entreprise innovante pour appliquer mes compétences
-        en systèmes embarqués, IoT et solutions intelligentes.
-    </p>
-</section>
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/youness-ouhaddou-a5074a2b8/" target="_blank" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://github.com/youness-ouhaddou" target="_blank" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="mailto:youness.ouha25@gmail.com" aria-label="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+        <p class="copyright">© 2025 Youness OUHADDOU. Tous droits réservés.</p>
+    </footer>
 
-<footer>
-    <p>© 2026 – Youness Ouhaddou</p>
-</footer>
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
 
+    <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // Scroll Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Form Submission Handler
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            // Create mailto link
+            const mailtoLink = `mailto:youness.ouha25@gmail.com?subject=Portfolio Contact - ${encodeURIComponent(name)}&body=${encodeURIComponent(`De: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+
+            window.open(mailtoLink, '_blank');
+
+            showToast('Redirection vers votre client email...');
+
+            // Reset form
+            event.target.reset();
+        }
+
+        // Toast Notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(2, 12, 27, 0.95)';
+            } else {
+                nav.style.background = 'rgba(2, 12, 27, 0.85)';
+            }
+        });
+    </script>
 </body>
 </html>
